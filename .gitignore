@@ -8,6 +8,7 @@ dist
 .claude/
 .netlify/
 .tanstack/tmp/
+.vercel/output/
 # Legacy files from previous project
 public/cabinet.jpg
 public/sylviane-*.jpg

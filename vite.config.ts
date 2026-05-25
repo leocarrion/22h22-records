@@ -3,6 +3,7 @@ import { defineConfig } from 'vite'
 import tsConfigPaths from 'vite-tsconfig-paths'
 import tailwindcss from '@tailwindcss/vite'
 import viteReact from '@vitejs/plugin-react'
+import { nitro } from 'nitro/vite'
 
 export default defineConfig({
   server: {
@@ -17,7 +18,12 @@ export default defineConfig({
     tsConfigPaths({
       projects: ['./tsconfig.json'],
     }),
-    tanstackStart(),
+    tanstackStart({
+      srcDirectory: 'src',
+    }),
     viteReact(),
+    nitro({
+      preset: 'vercel',
+    }),
   ],
 })
