@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+
+  /* 22H22 Records */
+  --color-paper-cream: #F2EBDB;
+  --color-ink-black: #000000;
+  --color-origins-orange: #D9622A;
+  --color-becoming-blue: #2A5BD9;
+  --color-crossroads-olive: #6B7A3A;
+  --color-homecoming-red: #8B2A2A;
+  --color-warm-surface: #fff9ed;
+  --color-warm-container: #f4eddd;
+  --color-warm-variant: #e9e2d2;
+  --color-warm-muted: #4c4546;
+}
+
+/* 22H22 Records animations */
+@keyframes sunburst-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin-slow { animation: sunburst-spin 20s linear infinite; }
+.spin-very-slow { animation: sunburst-spin 60s linear infinite; }
+
+/* Vinyl sleeve hover pull-out effect */
+.sleeve-wrapper .sleeve-vinyl {
+  transform: translateX(0);
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+  z-index: 5;
+}
+.sleeve-wrapper .sleeve-card {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 10;
+}
+.sleeve-wrapper:hover .sleeve-card {
+  transform: translateY(-10px);
+}
+.sleeve-wrapper:hover .sleeve-vinyl {
+  transform: translateX(45%);
+  opacity: 1;
+}
+
+@layer base {
+  html, body {
+    font-family: "Inter", sans-serif;
+    background-color: #fff9ed;
+    color: #000000;
+  }
+}
