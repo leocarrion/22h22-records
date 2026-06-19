@@ -3,7 +3,6 @@ import { useState } from 'react'
 import {
   RecordsHeader,
   RecordsBottomNav,
-  SunburstIcon,
   TracklistSection,
   TrackRevealOverlay,
   type Track,
@@ -14,40 +13,23 @@ export const Route = createFileRoute('/emerging')({
   component: EmergingPage,
 })
 
-const COLOR = '#C99A2B'
-const COLOR_CLASS = 'text-emerging-mustard'
+const COLOR = '#7856AF'
+const COLOR_CLASS = 'text-emerging-purple'
+const FRONT_IMG = '/FRONT%20VINYLE%203.png'
+const MACARON_A = '/MACARON%20VINYLE%203%20FACE%20A.png'
+const MACARON_B = '/MACARON%20VINYLE%203%20FACE%20B.png'
 
 const sideA: Track[] = [
-  { num: '01', title: 'Nique la BAC', artist: 'Lorenzo', duration: '02:27' },
-  { num: '02', title: 'Day N Nite', artist: 'KID CUDI', duration: '02:48' },
-  {
-    num: '03',
-    title: "Stoner's Night 2 (feat. Wiz Khalifa)",
-    artist: 'Juicy J',
-    duration: '03:35',
-  },
-  {
-    num: '04',
-    title: 'Heads Will Roll (A-Trak Remix)',
-    artist: 'Yeah Yeah Yeahs',
-    duration: '06:24',
-  },
+  { num: '01', artist: 'Lorenzo', title: 'Nique la BAC', duration: '2:27' },
+  { num: '02', artist: 'Kid Cudi', title: "Day 'n' Nite", duration: '2:48' },
+  { num: '03', artist: 'Juicy J feat. Wiz Khalifa', title: "Stoner's Night 2", duration: '3:35' },
+  { num: '04', artist: 'Yeah Yeah Yeahs', title: 'Head Will Roll (A-Trak remix)', duration: '3:23' },
 ]
 
 const sideB: Track[] = [
-  {
-    num: '01',
-    title: 'Push The Feeling On (Mk Dub Revisited Edit)',
-    artist: 'Nightcrawlers',
-    duration: '04:03',
-  },
-  {
-    num: '02',
-    title: 'But en or',
-    artist: 'Isha, Limsa D\'Aulnay',
-    duration: '02:37',
-  },
-  { num: '03', title: 'Runaway (Album Version)', artist: 'Kanye West', duration: '06:11' },
+  { num: '01', artist: 'Mk Dub Revisited Edit', title: 'Push The Feeling On', duration: '4:03' },
+  { num: '02', artist: "ISHA & Limsa D'Aulnay", title: 'But en Or', duration: '2:37' },
+  { num: '03', artist: 'Kanye West, Pusha T', title: 'Runaway', duration: '7:00' },
 ]
 
 function EmergingPage() {
@@ -59,73 +41,62 @@ function EmergingPage() {
       style={{ fontFamily: 'Inter, sans-serif' }}
     >
       <RecordsHeader backTo="/" />
-      <main className="pt-[72px] pb-24 px-6 max-w-lg mx-auto">
-        {/* Chapter header */}
-        <section className="mt-8 mb-10">
-          <span
-            className="text-[12px] font-bold tracking-[0.2em] block mb-2"
-            style={{ color: COLOR }}
-          >
-            CHAPTER THREE
-          </span>
-          <h2
-            className="font-sans text-[40px] font-bold uppercase leading-none mb-4"
-            style={{ letterSpacing: '-0.04em' }}
-          >
-            EMERGING.
-          </h2>
-          <div className="w-10 h-[2px] mb-6" style={{ backgroundColor: COLOR }} />
-          <p className="text-[18px] leading-[28px] text-ink-black" style={{ letterSpacing: '-0.01em' }}>
-            « Le moment où l'on prend sa place. Ces morceaux marquent l'instant où Adrien commence
-            à s'affirmer, à choisir ses propres voies, à se laisser exister pleinement. Ni l'enfant
-            ni l'adulte tout à fait — quelque chose en train d'éclore. »
-          </p>
-        </section>
+      <main className="pt-[72px] pb-24">
+        {/* Hero cover */}
+        <div className="w-full aspect-square max-w-lg mx-auto">
+          <img
+            src={FRONT_IMG}
+            alt="Emerging — 22H22 Records"
+            className="w-full h-full object-cover"
+            loading="eager"
+          />
+        </div>
 
-        {/* Spinning vinyl */}
-        <section className="mb-12 flex justify-center">
-          <div className="relative w-72 h-72 flex items-center justify-center">
-            <div
-              className="absolute inset-0 bg-[#121212] rounded-full border border-ink-black/20 shadow-xl"
-              style={{
-                background:
-                  'repeating-radial-gradient(circle at center, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 2px, transparent 5px)',
-              }}
-            />
-            <div className="relative z-10 w-36 h-36 bg-paper-cream rounded-full border border-ink-black/10 flex items-center justify-center overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center spin-very-slow">
-                <SunburstIcon color={COLOR} className="w-full h-full p-2" />
-              </div>
-              <div className="relative z-20 flex flex-col items-center text-center">
-                <span className="text-[10px] font-bold tracking-[0.1em] text-ink-black">A SIDE</span>
-                <span
-                  className="font-sans font-bold text-ink-black leading-none"
-                  style={{ fontSize: '22px', letterSpacing: '-0.03em' }}
-                >
-                  22
-                  <br />
-                  H22
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
+        <div className="px-6 max-w-lg mx-auto">
+          {/* Chapter header */}
+          <section className="mt-8 mb-10">
+            <span
+              className="text-[12px] font-bold tracking-[0.2em] block mb-2"
+              style={{ color: COLOR }}
+            >
+              CHAPTER THREE
+            </span>
+            <h2
+              className="font-sans text-[40px] font-bold uppercase leading-none mb-4"
+              style={{ letterSpacing: '-0.04em' }}
+            >
+              EMERGING.
+            </h2>
+            <div className="w-10 h-[2px] mb-6" style={{ backgroundColor: COLOR }} />
+            <p className="text-[18px] leading-[28px] text-ink-black" style={{ letterSpacing: '-0.01em' }}>
+              New horizons. New ambitions. The first thoughts of elsewhere.
+            </p>
+            <p className="text-[18px] leading-[28px] text-ink-black mt-4" style={{ letterSpacing: '-0.01em' }}>
+              These songs belong to the moments when the world begins to open up — when ideas take root, dreams grow larger and the desire to explore beyond the familiar starts to emerge.
+            </p>
+            <p className="text-[18px] leading-[28px] text-ink-black mt-4" style={{ letterSpacing: '-0.01em' }}>
+              Emerging captures that quiet turning point, where the future begins to take shape long before the journey itself begins.
+            </p>
+          </section>
 
-        {/* Tracklists */}
-        <TracklistSection
-          side="A"
-          total="15:14"
-          tracks={sideA}
-          colorClass={COLOR_CLASS}
-          onReveal={setSelectedTrack}
-        />
-        <TracklistSection
-          side="B"
-          total="12:52"
-          tracks={sideB}
-          colorClass={COLOR_CLASS}
-          onReveal={setSelectedTrack}
-        />
+          {/* Tracklists */}
+          <TracklistSection
+            side="A"
+            total="12:13"
+            tracks={sideA}
+            colorClass={COLOR_CLASS}
+            onReveal={setSelectedTrack}
+            macaronSrc={MACARON_A}
+          />
+          <TracklistSection
+            side="B"
+            total="13:40"
+            tracks={sideB}
+            colorClass={COLOR_CLASS}
+            onReveal={setSelectedTrack}
+            macaronSrc={MACARON_B}
+          />
+        </div>
       </main>
 
       <RecordsBottomNav active="collection" />

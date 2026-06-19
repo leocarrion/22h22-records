@@ -4,31 +4,31 @@
   --font-sans: "Inter", sans-serif;
 
   /* 22H22 Records — base palette */
-  --color-paper-cream: #F2EBDB;
-  --color-ink-black: #000000;
-  --color-warm-surface: #fff9ed;
-  --color-warm-container: #f4eddd;
-  --color-warm-variant: #e9e2d2;
+  --color-paper-cream: #F5F1E8;
+  --color-ink-black: #0A0A0A;
+  --color-warm-surface: #F5F1E8;
+  --color-warm-container: #ede8d8;
+  --color-warm-variant: #e3dece;
   --color-warm-muted: #4c4546;
 
   /* 22H22 Records — chapter accent colors (also exposed as CSS vars in :root below) */
-  --color-origins-orange: #D9622A;
-  --color-becoming-blue: #2A5BD9;
-  --color-emerging-mustard: #C99A2B;
-  --color-crossroads-olive: #6B7A3A;
-  --color-homecoming-red: #8B2A2A;
+  --color-origins-orange: #C65D3B;
+  --color-becoming-blue: #1D4ED8;
+  --color-emerging-purple: #7856AF;
+  --color-crossroads-olive: #68703E;
+  --color-homecoming-red: #7A1F1F;
 }
 
 :root {
-  --color-paper: #F2EBDB;
-  --color-paper-tinted: #FFF9ED;
+  --color-paper: #F5F1E8;
+  --color-paper-tinted: #F5F1E8;
   --color-ink: #0A0A0A;
 
-  --color-origins: #D9622A;
-  --color-becoming: #2A5BD9;
-  --color-emerging: #C99A2B; /* temporary — will be updated by designer */
-  --color-crossroads: #6B7A3A;
-  --color-homecoming: #8B2A2A;
+  --color-origins: #C65D3B;
+  --color-becoming: #1D4ED8;
+  --color-emerging: #7856AF;
+  --color-crossroads: #68703E;
+  --color-homecoming: #7A1F1F;
 }
 
 /* 22H22 Records animations */
@@ -39,6 +39,14 @@
 
 .spin-slow { animation: sunburst-spin 20s linear infinite; }
 .spin-very-slow { animation: sunburst-spin 60s linear infinite; }
+
+/* Macaron vinyl label spin on track row hover */
+.macaron-spin {
+  transition: transform 0.3s ease;
+}
+.track-row:hover .macaron-spin {
+  animation: sunburst-spin 30s linear infinite;
+}
 
 /* Vinyl sleeve hover pull-out effect */
 .sleeve-wrapper .sleeve-vinyl {

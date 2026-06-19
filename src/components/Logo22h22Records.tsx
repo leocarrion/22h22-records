@@ -45,8 +45,8 @@ export function Logo22h22Records({ className }: { className?: string }) {
       </g>
       {/* WORDMARK — FIXED */}
       <g fill="currentColor" fontFamily="'Archivo Black', Impact, sans-serif" fontWeight={900} textAnchor="middle">
-        <text x={133} y={320} fontSize={70} letterSpacing={-2}>22H22</text>
-        <text x={133} y={385} fontSize={50} letterSpacing={1}>RECORDS</text>
+        <text x={133} y={318} fontSize={68} letterSpacing={-2}>22H22</text>
+        <text x={133} y={382} fontSize={44} letterSpacing={0}>RECORDS</text>
       </g>
     </svg>
   )

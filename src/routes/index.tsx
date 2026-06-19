@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { Logo22h22Records } from '~/components/Logo22h22Records'
-import { RecordsBottomNav } from '~/components/records'
 
 export const Route = createFileRoute('/')({
   component: CollectionPage,
@@ -10,46 +9,46 @@ const vinyls = [
   {
     id: 'origins',
     label: 'Origins',
-    color: '#D9622A',
-    colorVar: 'var(--color-origins)',
+    color: '#C65D3B',
     number: '01 / 05',
     href: '/origins' as const,
+    frontImg: '/FRONT%20VINYLE%201.png',
   },
   {
     id: 'becoming',
     label: 'Becoming',
-    color: '#2A5BD9',
-    colorVar: 'var(--color-becoming)',
+    color: '#1D4ED8',
     number: '02 / 05',
     href: '/becoming' as const,
+    frontImg: '/FRONT%20VINYLE%202.png',
   },
   {
     id: 'emerging',
     label: 'Emerging',
-    color: '#C99A2B',
-    colorVar: 'var(--color-emerging)',
+    color: '#7856AF',
     number: '03 / 05',
     href: '/emerging' as const,
+    frontImg: '/FRONT%20VINYLE%203.png',
   },
   {
     id: 'crossroads',
     label: 'Crossroads',
-    color: '#6B7A3A',
-    colorVar: 'var(--color-crossroads)',
+    color: '#68703E',
     number: '04 / 05',
     href: '/crossroads' as const,
+    frontImg: '/FRONT%20VINYLE%204.png',
   },
   {
     id: 'homecoming',
     label: 'Homecoming',
-    color: '#8B2A2A',
-    colorVar: 'var(--color-homecoming)',
+    color: '#7A1F1F',
     number: '05 / 05',
     href: '/homecoming' as const,
+    frontImg: '/FRONT%20VINYLE%205.png',
   },
 ]
 
-function VinylSleeve({ vinyl }: { vinyl: (typeof vinyls)[number] }) {
+function VinylSleeve({ vinyl, index }: { vinyl: (typeof vinyls)[number]; index: number }) {
   return (
     <Link to={vinyl.href} className="w-full block">
       <div className="sleeve-wrapper relative w-full cursor-pointer">
@@ -64,26 +63,16 @@ function VinylSleeve({ vinyl }: { vinyl: (typeof vinyls)[number] }) {
             </div>
           </div>
         </div>
-        {/* Sleeve card */}
-        <div
-          className="sleeve-card relative aspect-square w-full bg-paper-cream border border-ink-black/10 flex flex-col items-center justify-center overflow-hidden shadow-sm"
-          style={{ color: vinyl.color }}
-        >
-          {/* Background sunburst watermark */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-[0.07] pointer-events-none">
-            <Logo22h22Records className="w-full h-full p-6" />
-          </div>
-          {/* Content */}
-          <div className="z-10 text-center space-y-3 px-6">
-            <Logo22h22Records className="w-24 h-24 mx-auto" />
-            <div>
-              <p className="text-[13px] font-bold tracking-[0.2em] uppercase" style={{ color: vinyl.color }}>
-                {vinyl.label}
-              </p>
-            </div>
-          </div>
-          <div className="absolute bottom-4 right-4">
-            <p className="text-[13px] font-medium opacity-40 text-ink-black">{vinyl.number}</p>
+        {/* Sleeve card — real cover artwork */}
+        <div className="sleeve-card relative aspect-square w-full overflow-hidden shadow-sm">
+          <img
+            src={vinyl.frontImg}
+            alt={`${vinyl.label} cover`}
+            className="w-full h-full object-cover"
+            loading={index === 0 ? 'eager' : 'lazy'}
+          />
+          <div className="absolute bottom-3 right-3 bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded">
+            <p className="text-[11px] font-medium text-white/80 tracking-widest">{vinyl.number}</p>
           </div>
         </div>
       </div>
@@ -116,21 +105,26 @@ function CollectionPage() {
             className="text-[18px] leading-[28px] text-ink-black"
             style={{ letterSpacing: '-0.01em' }}
           >
-            Mon Picouze, ces cinq vinyles racontent ta vie en musique, à travers les personnes
-            qui comptent pour toi.
+            Mon Picouze,
+          </p>
+          <p
+            className="text-[18px] leading-[28px] text-ink-black"
+            style={{ letterSpacing: '-0.01em' }}
+          >
+            Ces cinq vinyles racontent ta vie en musique, à travers les personnes qui comptent pour toi. Une personne, un titre.
           </p>
           <p className="text-[16px] leading-[24px] text-warm-muted italic">
-            Une personne, un titre. Scanne le QR code de chaque pochette pour découvrir qui se
-            cache derrière chaque morceau.
+            Scanne le QR code de chaque pochette pour découvrir qui se cache derrière chaque morceau.
           </p>
-          <p className="text-[12px] font-bold tracking-[0.1em] uppercase text-ink-black mt-2">
-            BON VOYAGE. — ADRIEN
+          <p className="text-[14px] font-medium text-ink-black mt-1">
+            Bon voyage.<br />
+            <span className="font-bold">— Julie</span>
           </p>
         </section>
 
         <div className="flex flex-col gap-12">
-          {vinyls.map((vinyl) => (
-            <VinylSleeve key={vinyl.id} vinyl={vinyl} />
+          {vinyls.map((vinyl, i) => (
+            <VinylSleeve key={vinyl.id} vinyl={vinyl} index={i} />
           ))}
         </div>
 
@@ -143,7 +137,6 @@ function CollectionPage() {
           </p>
         </footer>
       </main>
-      <RecordsBottomNav active="collection" />
     </div>
   )
 }

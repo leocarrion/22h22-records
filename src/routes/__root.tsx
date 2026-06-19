@@ -73,10 +73,42 @@ export const Route = createRootRouteWithContext<{
   component: RootComponent,
 })
 
+function GlobalFooter() {
+  return (
+    <footer
+      className="w-full px-6 py-12 text-center border-t border-ink-black/10"
+      style={{ fontFamily: 'Inter, sans-serif' }}
+    >
+      <div className="max-w-lg mx-auto space-y-4" style={{ color: '#5A4A2E' }}>
+        <p className="text-[13px] leading-relaxed italic">
+          All tracks selected by Adrien Picard's family & closest friends
+          <br />
+          (loving him since 1986, for some of them)
+        </p>
+        <p className="text-[13px] leading-relaxed italic">
+          A life soundtrack, composed over time by everyone who crossed the frequency
+        </p>
+        <div className="h-px w-12 bg-current opacity-30 mx-auto" />
+        <p className="text-[12px] leading-relaxed">
+          (Life) Project manager: Julie Mycke (assisted by Léo Carrion)
+          <br />
+          Executive producers: Family &amp; friends
+          <br />
+          Contributors: everyone, knowingly or not
+        </p>
+        <p className="text-[12px] font-medium tracking-wider mt-2">
+          — Picouz Editions × 22H22 Records —
+        </p>
+      </div>
+    </footer>
+  )
+}
+
 function RootComponent() {
   return (
     <RootDocument>
       <Outlet />
+      <GlobalFooter />
     </RootDocument>
   )
 }

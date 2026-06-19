@@ -1,4 +1,4 @@
-import { Link, useNavigate } from '@tanstack/react-router'
+import { useNavigate } from '@tanstack/react-router'
 
 export type Selector = {
   name: string
@@ -77,35 +77,9 @@ export function RecordsHeader({ backTo }: { backTo?: string }) {
   )
 }
 
-type NavId = 'collection' | 'player' | 'notes' | 'more'
-
-export function RecordsBottomNav({ active }: { active: NavId }) {
-  const tabs: Array<{ id: NavId; icon: string; label: string; to: string }> = [
-    { id: 'collection', icon: 'adjust', label: 'COLLECTION', to: '/' },
-    { id: 'player', icon: 'album', label: 'PLAYER', to: '/' },
-    { id: 'notes', icon: 'history_edu', label: 'NOTES', to: '/' },
-    { id: 'more', icon: 'menu', label: 'MORE', to: '/' },
-  ]
-  return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 h-16 bg-paper-cream border-t border-ink-black">
-      <div className="max-w-lg mx-auto h-full flex justify-around items-stretch">
-        {tabs.map((tab) => (
-          <Link
-            key={tab.id}
-            to={tab.to as '/'}
-            className={`flex flex-col items-center justify-center flex-1 gap-0.5 transition-colors ${
-              active === tab.id
-                ? 'text-homecoming-red border-t-2 border-homecoming-red -mt-px'
-                : 'text-warm-muted hover:bg-warm-variant'
-            }`}
-          >
-            <span className="material-symbols-outlined text-[22px]">{tab.icon}</span>
-            <span className="text-[9px] font-bold tracking-[0.1em]">{tab.label}</span>
-          </Link>
-        ))}
-      </div>
-    </nav>
-  )
+/** @deprecated Footer nav removed — use RecordsHeader backTo prop instead */
+export function RecordsBottomNav({ active: _active }: { active: string }) {
+  return null
 }
 
 export function TrackRevealOverlay({
@@ -242,18 +216,29 @@ export function TrackItem({
   track,
   colorClass,
   onReveal,
+  macaronSrc,
 }: {
   track: Track
   colorClass: string
   onReveal: (track: Track) => void
+  macaronSrc?: string
 }) {
   return (
-    <div className="flex flex-col gap-1.5 py-3 border-b border-ink-black/10 last:border-0 -mx-2 px-2 hover:bg-warm-container rounded-sm transition-colors">
-      <div className="flex justify-between items-start gap-4">
-        <div className="flex gap-4 flex-1 min-w-0">
+    <div className="track-row flex flex-col gap-1.5 py-3 border-b border-ink-black/10 last:border-0 -mx-2 px-2 hover:bg-warm-container rounded-sm transition-colors">
+      <div className="flex justify-between items-start gap-3">
+        <div className="flex gap-3 flex-1 min-w-0 items-center">
+          {macaronSrc && (
+            <div className="shrink-0 w-10 h-10 rounded-full overflow-hidden border border-black/10">
+              <img
+                src={macaronSrc}
+                alt=""
+                className="macaron-spin w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          )}
           <span className={`text-[13px] font-medium shrink-0 mt-0.5 ${colorClass}`}>
-            {track.num}.
-          </span>
+            {track.num}.</span>
           <div className="min-w-0">
             <h4 className="font-sans text-[17px] font-semibold leading-tight text-ink-black">
               {track.title}
@@ -316,12 +301,14 @@ export function TracklistSection({
   tracks,
   colorClass,
   onReveal,
+  macaronSrc,
 }: {
-  side: 'A' | 'B'
+  side: 'A' | 'B' | 'J'
   total: string
   tracks: Track[]
   colorClass: string
   onReveal: (track: Track) => void
+  macaronSrc?: string
 }) {
   return (
     <section className="mb-10">
@@ -331,7 +318,13 @@ export function TracklistSection({
       </div>
       <div className="flex flex-col">
         {tracks.map((track) => (
-          <TrackItem key={track.num} track={track} colorClass={colorClass} onReveal={onReveal} />
+          <TrackItem
+            key={track.num}
+            track={track}
+            colorClass={colorClass}
+            onReveal={onReveal}
+            macaronSrc={macaronSrc}
+          />
         ))}
       </div>
     </section>
