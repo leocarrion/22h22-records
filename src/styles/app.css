@@ -3,17 +3,32 @@
 @theme {
   --font-sans: "Inter", sans-serif;
 
-  /* 22H22 Records */
+  /* 22H22 Records — base palette */
   --color-paper-cream: #F2EBDB;
   --color-ink-black: #000000;
-  --color-origins-orange: #D9622A;
-  --color-becoming-blue: #2A5BD9;
-  --color-crossroads-olive: #6B7A3A;
-  --color-homecoming-red: #8B2A2A;
   --color-warm-surface: #fff9ed;
   --color-warm-container: #f4eddd;
   --color-warm-variant: #e9e2d2;
   --color-warm-muted: #4c4546;
+
+  /* 22H22 Records — chapter accent colors (also exposed as CSS vars in :root below) */
+  --color-origins-orange: #D9622A;
+  --color-becoming-blue: #2A5BD9;
+  --color-emerging-mustard: #C99A2B;
+  --color-crossroads-olive: #6B7A3A;
+  --color-homecoming-red: #8B2A2A;
+}
+
+:root {
+  --color-paper: #F2EBDB;
+  --color-paper-tinted: #FFF9ED;
+  --color-ink: #0A0A0A;
+
+  --color-origins: #D9622A;
+  --color-becoming: #2A5BD9;
+  --color-emerging: #C99A2B; /* temporary — will be updated by designer */
+  --color-crossroads: #6B7A3A;
+  --color-homecoming: #8B2A2A;
 }
 
 /* 22H22 Records animations */

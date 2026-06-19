@@ -10,6 +10,7 @@ import {
 } from '~/components/records'
 
 export const Route = createFileRoute('/becoming')({
+  head: () => ({ meta: [{ title: '22H22 / Becoming' }] }),
   component: BecomingPage,
 })
 

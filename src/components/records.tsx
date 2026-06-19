@@ -214,6 +214,30 @@ export function TrackRevealOverlay({
   )
 }
 
+function spotifySearchUrl(artist: string, title: string) {
+  return `https://open.spotify.com/search/${encodeURIComponent(`${artist} ${title}`)}`
+}
+
+function appleMusicSearchUrl(artist: string, title: string) {
+  return `https://music.apple.com/search?term=${encodeURIComponent(`${artist} ${title}`)}`
+}
+
+function SpotifyIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.516 17.313a.75.75 0 01-1.031.25c-2.823-1.725-6.376-2.115-10.563-1.159a.75.75 0 01-.334-1.463c4.583-1.047 8.515-.596 11.678 1.34a.75.75 0 01.25 1.032zm1.472-3.274a.937.937 0 01-1.288.308c-3.23-1.985-8.152-2.56-11.974-1.402a.937.937 0 11-.544-1.794c4.365-1.323 9.79-.682 13.498 1.6a.938.938 0 01.308 1.288zm.127-3.408C15.27 8.28 8.924 8.068 5.292 9.16a1.125 1.125 0 11-.653-2.154c4.213-1.278 11.218-1.031 15.641 1.633a1.125 1.125 0 11-1.165 1.932z"/>
+    </svg>
+  )
+}
+
+function AppleMusicIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+      <path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026C4.786.07 4.043.15 3.34.428 2.004.958 1.04 1.88.475 3.208c-.192.448-.292.925-.363 1.408-.056.392-.088.785-.1 1.18 0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424.05.815.154 1.624.497 2.373.65 1.42 1.738 2.353 3.234 2.802.42.127.856.187 1.293.228.555.053 1.11.06 1.667.06h11.03c.525 0 1.048-.034 1.57-.1.823-.106 1.597-.35 2.296-.81a5.046 5.046 0 001.88-2.207c.186-.42.293-.87.37-1.324.113-.675.138-1.358.137-2.04-.002-3.8 0-7.595-.003-11.393zm-6.423 3.99v5.712c0 .417-.058.827-.244 1.206-.29.59-.76.962-1.388 1.14-.35.1-.706.157-1.07.173-.95.045-1.773-.6-1.943-1.536a1.88 1.88 0 011.038-2.022c.323-.157.672-.216 1.018-.274.368-.062.737-.12 1.098-.212.282-.072.442-.274.46-.558.003-.04.004-.082.004-.122V7.797c0-.345-.192-.522-.53-.453l-5.005 1.07c-.285.06-.405.2-.405.495v7.17c0 .37-.02.74-.126 1.1-.285.99-1.03 1.542-2.066 1.58-.476.017-.942-.03-1.39-.2a1.878 1.878 0 01-1.24-1.797c.014-.97.64-1.69 1.58-1.894.386-.084.778-.14 1.167-.208.274-.047.554-.08.818-.165.314-.1.42-.274.42-.6V5.645c0-.327.17-.55.485-.62 1.063-.233 2.125-.463 3.19-.692l2.897-.625c.619-.133.928.134.932.764v4.622z"/>
+    </svg>
+  )
+}
+
 export function TrackItem({
   track,
   colorClass,
@@ -226,24 +250,52 @@ export function TrackItem({
   return (
     <div className="flex flex-col gap-1.5 py-3 border-b border-ink-black/10 last:border-0 -mx-2 px-2 hover:bg-warm-container rounded-sm transition-colors">
       <div className="flex justify-between items-start gap-4">
-        <div className="flex gap-4">
+        <div className="flex gap-4 flex-1 min-w-0">
           <span className={`text-[13px] font-medium shrink-0 mt-0.5 ${colorClass}`}>
             {track.num}.
           </span>
-          <div>
+          <div className="min-w-0">
             <h4 className="font-sans text-[17px] font-semibold leading-tight text-ink-black">
               {track.title}
             </h4>
             <p className="text-[13px] font-medium text-warm-muted mt-0.5">{track.artist}</p>
           </div>
         </div>
-        <div className="flex items-center gap-1.5 shrink-0 mt-0.5">
+        <div className="flex items-center gap-2 shrink-0 mt-0.5">
           {track.nowPlaying && (
             <span className={`material-symbols-outlined text-[16px] ${colorClass}`}>
               equalizer
             </span>
           )}
           <span className="text-[13px] font-medium text-warm-muted">{track.duration}</span>
+          <div className="flex items-center gap-1 ml-1">
+            <a
+              href={spotifySearchUrl(track.artist, track.title)}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Écouter sur Spotify"
+              className="relative group text-[#1DB954] opacity-70 hover:opacity-100 transition-all hover:scale-105"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <SpotifyIcon />
+              <span className="pointer-events-none absolute bottom-full right-0 mb-1 whitespace-nowrap rounded bg-ink-black px-2 py-0.5 text-[10px] font-bold tracking-wide text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                Écouter sur Spotify
+              </span>
+            </a>
+            <a
+              href={appleMusicSearchUrl(track.artist, track.title)}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Écouter sur Apple Music"
+              className="relative group text-[#FC3C44] opacity-70 hover:opacity-100 transition-all hover:scale-105"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <AppleMusicIcon />
+              <span className="pointer-events-none absolute bottom-full right-0 mb-1 whitespace-nowrap rounded bg-ink-black px-2 py-0.5 text-[10px] font-bold tracking-wide text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                Écouter sur Apple Music
+              </span>
+            </a>
+          </div>
         </div>
       </div>
       {track.selector && (
