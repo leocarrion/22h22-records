@@ -71,7 +71,7 @@
   box-shadow: 0 16px 40px rgba(0,0,0,0.18);
 }
 .sleeve-wrapper:hover .vinyl-disc-inner {
-  transform: translateX(38%);
+  transform: translateX(55%);
 }
 /* Macaron label on the vinyl disc spins */
 .vinyl-disc-label {
@@ -80,7 +80,7 @@
 /* Mobile (no true hover): show a small peek at rest */
 @media (hover: none) {
   .sleeve-wrapper .vinyl-disc-inner {
-    transform: translateX(18%);
+    transform: translateX(32%);
   }
 }
 
