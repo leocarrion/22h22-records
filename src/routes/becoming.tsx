@@ -26,7 +26,7 @@ const sideA: Track[] = [
 ]
 
 const sideB: Track[] = [
-  { num: '01', artist: 'Vibz Kartel', title: 'Summer Time', duration: '4:10' },
+  { num: '01', artist: 'Vybz Kartel', title: 'Summer Time', duration: '4:10' },
   { num: '02', artist: 'Ghali', title: '22:22', duration: '3:00' },
   { num: '03', artist: 'Franko', title: 'Coller la petite', duration: '3:52' },
 ]

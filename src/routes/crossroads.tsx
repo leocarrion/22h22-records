@@ -21,7 +21,7 @@ const MACARON_B = '/MACARON%20VINYLE%204%20FACE%20B.png'
 
 const sideA: Track[] = [
   { num: '01', artist: 'Mike Jones feat. Slim Thug and Paul Wall', title: "Still Tippin'", duration: '4:31' },
-  { num: '02', artist: 'Booby x Franky Vincent Mashup', title: 'Validé de la passion', duration: '4:48' },
+  { num: '02', artist: 'Booba x Francky Vincent Mashup', title: 'Validée de la Passion', duration: '4:48' },
   { num: '03', artist: 'Roy Ayers Ubiquity', title: 'Everybody Loves The Sunshine', duration: '4:00' },
 ]
 

@@ -13,6 +13,7 @@ const vinyls = [
     number: '01 / 05',
     href: '/origins' as const,
     frontImg: '/FRONT%20VINYLE%201.png',
+    macaronA: '/MACARON%20VINYLE%201%20FACE%20A.png',
   },
   {
     id: 'becoming',
@@ -21,6 +22,7 @@ const vinyls = [
     number: '02 / 05',
     href: '/becoming' as const,
     frontImg: '/FRONT%20VINYLE%202.png',
+    macaronA: '/MACARON%20VINYLE%202%20FACE%20A.png',
   },
   {
     id: 'emerging',
@@ -29,6 +31,7 @@ const vinyls = [
     number: '03 / 05',
     href: '/emerging' as const,
     frontImg: '/FRONT%20VINYLE%203.png',
+    macaronA: '/MACARON%20VINYLE%203%20FACE%20A.png',
   },
   {
     id: 'crossroads',
@@ -37,6 +40,7 @@ const vinyls = [
     number: '04 / 05',
     href: '/crossroads' as const,
     frontImg: '/FRONT%20VINYLE%204.png',
+    macaronA: '/MACARON%20VINYLE%204%20FACE%20A.png',
   },
   {
     id: 'homecoming',
@@ -45,26 +49,42 @@ const vinyls = [
     number: '05 / 05',
     href: '/homecoming' as const,
     frontImg: '/FRONT%20VINYLE%205.png',
+    macaronA: '/MACARON%20VINYLE%205%20FACE%20A.png',
   },
 ]
 
 function VinylSleeve({ vinyl, index }: { vinyl: (typeof vinyls)[number]; index: number }) {
   return (
     <Link to={vinyl.href} className="w-full block">
-      <div className="sleeve-wrapper relative w-full cursor-pointer">
-        {/* Vinyl record hidden behind sleeve, slides out on hover */}
-        <div className="sleeve-vinyl absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[88%] aspect-square bg-zinc-900 rounded-full border-[10px] border-zinc-800 flex items-center justify-center shadow-xl">
-            <div
-              className="w-20 h-20 rounded-full flex items-center justify-center border-2 border-black/10"
-              style={{ backgroundColor: vinyl.color }}
-            >
-              <span className="text-[8px] font-bold text-white tracking-widest">SIDE A</span>
+      <div className="sleeve-wrapper cursor-pointer" style={{ position: 'relative' }}>
+        {/* Vinyl disc — sits behind the sleeve (z-index 1), slides right on hover */}
+        <div
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          style={{ zIndex: 1 }}
+        >
+          <div className="vinyl-disc-inner w-[82%] aspect-square">
+            <div className="relative w-full h-full rounded-full bg-zinc-900 shadow-2xl overflow-hidden">
+              {/* Groove rings */}
+              <div className="absolute inset-[8%] rounded-full border border-white/[0.04]" />
+              <div className="absolute inset-[20%] rounded-full border border-white/[0.04]" />
+              <div className="absolute inset-[32%] rounded-full border border-white/[0.04]" />
+              {/* Macaron center label — spins */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-[36%] aspect-square rounded-full overflow-hidden vinyl-disc-label">
+                  <img
+                    src={vinyl.macaronA}
+                    alt=""
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        {/* Sleeve card — real cover artwork */}
-        <div className="sleeve-card relative aspect-square w-full overflow-hidden shadow-sm">
+
+        {/* Sleeve card — real cover artwork, on top (z-index 2) */}
+        <div className="sleeve-card aspect-square w-full overflow-hidden" style={{ position: 'relative' }}>
           <img
             src={vinyl.frontImg}
             alt={`${vinyl.label} cover`}
