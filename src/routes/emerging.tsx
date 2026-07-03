@@ -23,7 +23,7 @@ const sideA: Track[] = [
   { id: 'emerging-a-1', num: '01', artist: 'Lorenzo', title: 'Nique la BAC', duration: '2:27' },
   { id: 'emerging-a-2', num: '02', artist: 'Kid Cudi', title: "Day 'n' Nite", duration: '2:48' },
   { id: 'emerging-a-3', num: '03', artist: 'Juicy J feat. Wiz Khalifa', title: "Stoner's Night 2", duration: '3:35' },
-  { id: 'emerging-a-4', num: '04', artist: 'Yeah Yeah Yeahs', title: 'Head Will Roll (A-Trak remix)', duration: '3:23' },
+  { id: 'emerging-a-4', num: '04', artist: 'Yeah Yeah Yeahs', title: 'Heads Will Roll (A-Trak Remix)', duration: '3:23' },
 ]
 
 const sideB: Track[] = [
@@ -78,6 +78,21 @@ function EmergingPage() {
               Emerging captures that quiet turning point, where the future begins to take shape long before the journey itself begins.
             </p>
           </section>
+
+          {/* YouTube playlist */}
+          <a
+            href="https://youtube.com/playlist?list=PLSM6M92AAcz4&si=eUX90kA8izNjroTX"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 w-full border border-black/10 hover:border-black/30 transition-colors px-4 py-3 mb-8 rounded"
+          >
+            <svg viewBox="0 0 24 24" fill="#FF0000" width="20" height="20">
+              <path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/>
+            </svg>
+            <span className="text-[13px] font-semibold" style={{ color: COLOR }}>
+              Écouter Emerging sur YouTube
+            </span>
+          </a>
 
           {/* Tracklists */}
           <TracklistSection

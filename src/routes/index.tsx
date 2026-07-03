@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { Logo22h22Records } from '~/components/Logo22h22Records'
+import { AnimatedVinylCover } from '~/components/AnimatedVinylCover'
 
 export const Route = createFileRoute('/')({
   component: CollectionPage,
@@ -12,7 +13,6 @@ const vinyls = [
     color: '#C65D3B',
     number: '01 / 05',
     href: '/origins' as const,
-    frontImg: '/Front%20vinyles%20svg/1.svg',
     macaronA: '/MACARON%20VINYLE%201%20FACE%20A.png',
   },
   {
@@ -21,7 +21,6 @@ const vinyls = [
     color: '#1D4ED8',
     number: '02 / 05',
     href: '/becoming' as const,
-    frontImg: '/Front%20vinyles%20svg/2.svg',
     macaronA: '/MACARON%20VINYLE%202%20FACE%20A.png',
   },
   {
@@ -30,7 +29,6 @@ const vinyls = [
     color: '#7856AF',
     number: '03 / 05',
     href: '/emerging' as const,
-    frontImg: '/Front%20vinyles%20svg/3.svg',
     macaronA: '/MACARON%20VINYLE%203%20FACE%20A.png',
   },
   {
@@ -39,7 +37,6 @@ const vinyls = [
     color: '#68703E',
     number: '04 / 05',
     href: '/crossroads' as const,
-    frontImg: '/Front%20vinyles%20svg/4.svg',
     macaronA: '/MACARON%20VINYLE%204%20FACE%20A.png',
   },
   {
@@ -48,12 +45,11 @@ const vinyls = [
     color: '#7A1F1F',
     number: '05 / 05',
     href: '/homecoming' as const,
-    frontImg: '/Front%20vinyles%20svg/5.svg',
     macaronA: '/MACARON%20VINYLE%205%20FACE%20A.png',
   },
 ]
 
-function VinylSleeve({ vinyl, index }: { vinyl: (typeof vinyls)[number]; index: number }) {
+function VinylSleeve({ vinyl }: { vinyl: (typeof vinyls)[number] }) {
   return (
     <Link to={vinyl.href} className="w-full block">
       <div className="sleeve-wrapper cursor-pointer" style={{ position: 'relative' }}>
@@ -83,17 +79,13 @@ function VinylSleeve({ vinyl, index }: { vinyl: (typeof vinyls)[number]; index: 
           </div>
         </div>
 
-        {/* Sleeve card — real cover artwork, on top (z-index 2) */}
-        <div className="sleeve-card aspect-square w-full overflow-hidden" style={{ position: 'relative' }}>
-          <img
-            src={vinyl.frontImg}
-            alt={`${vinyl.label} cover`}
-            className="w-full h-full object-cover"
-            loading={index === 0 ? 'eager' : 'lazy'}
+        {/* Sleeve card — animated cover, on top (z-index 2) */}
+        <div className="sleeve-card w-full overflow-hidden" style={{ position: 'relative' }}>
+          <AnimatedVinylCover
+            color={vinyl.color}
+            chapterName={vinyl.label}
+            chapterNumber={vinyl.number}
           />
-          <div className="absolute bottom-3 right-3 bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded">
-            <p className="text-[11px] font-medium text-white/80 tracking-widest">{vinyl.number}</p>
-          </div>
         </div>
       </div>
     </Link>
@@ -131,10 +123,19 @@ function CollectionPage() {
             className="text-[18px] leading-[28px] text-ink-black"
             style={{ letterSpacing: '-0.01em' }}
           >
-            Ces cinq vinyles racontent ta vie en musique, à travers les personnes qui comptent pour toi. Une personne, un titre.
+            Ces cinq vinyles racontent ta vie en musique, à travers les personnes qui comptent pour toi.
+          </p>
+          <p
+            className="text-[18px] leading-[28px] text-ink-black"
+            style={{ letterSpacing: '-0.01em' }}
+          >
+            Une personne, un titre.
           </p>
           <p className="text-[16px] leading-[24px] text-warm-muted italic">
             Scanne le QR code de chaque pochette pour découvrir qui se cache derrière chaque morceau.
+          </p>
+          <p className="text-[16px] leading-[24px] text-warm-muted italic">
+            Et si t'es loin de ta platine, retrouve ici l'intégralité des tracklists en écoute digitale, pour emporter ces souvenirs partout avec toi.
           </p>
           <p className="text-[14px] font-medium text-ink-black mt-1">
             Bon voyage.<br />
@@ -143,8 +144,8 @@ function CollectionPage() {
         </section>
 
         <div className="flex flex-col gap-12">
-          {vinyls.map((vinyl, i) => (
-            <VinylSleeve key={vinyl.id} vinyl={vinyl} index={i} />
+          {vinyls.map((vinyl) => (
+            <VinylSleeve key={vinyl.id} vinyl={vinyl} />
           ))}
         </div>
 

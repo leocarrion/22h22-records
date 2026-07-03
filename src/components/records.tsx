@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { useNavigate } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
 import { getReveal } from '~/data/reveals'
+import { youtubeUrls } from '~/data/youtube-urls'
 
 export type Selector = {
   name: string
@@ -66,12 +67,13 @@ export function RecordsHeader({ backTo }: { backTo?: string }) {
         >
           <span className="material-symbols-outlined text-ink-black">arrow_back</span>
         </button>
-        <h1
-          className="font-sans text-xl font-bold text-ink-black uppercase"
+        <Link
+          to="/"
+          className="font-sans text-xl font-bold text-ink-black uppercase hover:opacity-70 transition-opacity"
           style={{ letterSpacing: '-0.03em' }}
         >
           22H22 RECORDS
-        </h1>
+        </Link>
         <button className="opacity-40 hover:opacity-100 transition-opacity flex items-center">
           <span className="material-symbols-outlined text-ink-black">graphic_eq</span>
         </button>
@@ -191,22 +193,6 @@ export function TrackRevealOverlay({
   )
 }
 
-function spotifySearchUrl(artist: string, title: string) {
-  return `https://open.spotify.com/search/${encodeURIComponent(`${artist} ${title}`)}`
-}
-
-function youtubeSearchUrl(artist: string, title: string) {
-  return `https://www.youtube.com/results?search_query=${encodeURIComponent(`${artist} ${title}`)}`
-}
-
-function SpotifyIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
-      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.516 17.313a.75.75 0 01-1.031.25c-2.823-1.725-6.376-2.115-10.563-1.159a.75.75 0 01-.334-1.463c4.583-1.047 8.515-.596 11.678 1.34a.75.75 0 01.25 1.032zm1.472-3.274a.937.937 0 01-1.288.308c-3.23-1.985-8.152-2.56-11.974-1.402a.937.937 0 11-.544-1.794c4.365-1.323 9.79-.682 13.498 1.6a.938.938 0 01.308 1.288zm.127-3.408C15.27 8.28 8.924 8.068 5.292 9.16a1.125 1.125 0 11-.653-2.154c4.213-1.278 11.218-1.031 15.641 1.633a1.125 1.125 0 11-1.165 1.932z"/>
-    </svg>
-  )
-}
-
 function YouTubeIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
@@ -226,6 +212,8 @@ export function TrackItem({
   onReveal: (track: Track) => void
   macaronSrc?: string
 }) {
+  const ytUrl = track.id ? youtubeUrls[track.id] : undefined
+
   return (
     <div className="track-row flex flex-col gap-1.5 py-3 border-b border-ink-black/10 last:border-0 -mx-2 px-2 hover:bg-warm-container rounded-sm transition-colors">
       <div className="flex justify-between items-start gap-3">
@@ -256,34 +244,23 @@ export function TrackItem({
             </span>
           )}
           <span className="text-[13px] font-medium text-warm-muted">{track.duration}</span>
-          <div className="flex items-center gap-1 ml-1">
-            <a
-              href={spotifySearchUrl(track.artist, track.title)}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Écouter sur Spotify"
-              className="relative group text-[#1DB954] opacity-70 hover:opacity-100 transition-all hover:scale-105"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <SpotifyIcon />
-              <span className="pointer-events-none absolute bottom-full right-0 mb-1 whitespace-nowrap rounded bg-ink-black px-2 py-0.5 text-[10px] font-bold tracking-wide text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                Écouter sur Spotify
-              </span>
-            </a>
-            <a
-              href={youtubeSearchUrl(track.artist, track.title)}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Écouter sur YouTube"
-              className="relative group text-[#FF0000] opacity-70 hover:opacity-100 transition-all hover:scale-105"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <YouTubeIcon />
-              <span className="pointer-events-none absolute bottom-full right-0 mb-1 whitespace-nowrap rounded bg-ink-black px-2 py-0.5 text-[10px] font-bold tracking-wide text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                Écouter sur YouTube
-              </span>
-            </a>
-          </div>
+          {ytUrl && (
+            <div className="ml-1">
+              <a
+                href={ytUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Écouter sur YouTube"
+                className="relative group text-[#FF0000] opacity-70 hover:opacity-100 transition-all hover:scale-105"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <YouTubeIcon />
+                <span className="pointer-events-none absolute bottom-full right-0 mb-1 whitespace-nowrap rounded bg-ink-black px-2 py-0.5 text-[10px] font-bold tracking-wide text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                  Écouter sur YouTube
+                </span>
+              </a>
+            </div>
+          )}
         </div>
       </div>
       {track.id && getReveal(track.id) && (
@@ -458,7 +435,7 @@ export function RevealModal({
 
           {/* Message */}
           {reveal.message && (
-            <p className="text-white/85 text-[15px] leading-relaxed italic">
+            <p className="text-white/85 text-[15px] leading-relaxed italic whitespace-pre-line">
               "{reveal.message}"
             </p>
           )}
