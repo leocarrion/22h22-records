@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as OriginsRouteImport } from './routes/origins'
 import { Route as HomecomingRouteImport } from './routes/homecoming'
+import { Route as EmergingRouteImport } from './routes/emerging'
 import { Route as CrossroadsRouteImport } from './routes/crossroads'
 import { Route as BecomingRouteImport } from './routes/becoming'
 import { Route as IndexRouteImport } from './routes/index'
@@ -23,6 +24,11 @@ const OriginsRoute = OriginsRouteImport.update({
 const HomecomingRoute = HomecomingRouteImport.update({
   id: '/homecoming',
   path: '/homecoming',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmergingRoute = EmergingRouteImport.update({
+  id: '/emerging',
+  path: '/emerging',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CrossroadsRoute = CrossroadsRouteImport.update({
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/becoming': typeof BecomingRoute
   '/crossroads': typeof CrossroadsRoute
+  '/emerging': typeof EmergingRoute
   '/homecoming': typeof HomecomingRoute
   '/origins': typeof OriginsRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/becoming': typeof BecomingRoute
   '/crossroads': typeof CrossroadsRoute
+  '/emerging': typeof EmergingRoute
   '/homecoming': typeof HomecomingRoute
   '/origins': typeof OriginsRoute
 }
@@ -60,19 +68,33 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/becoming': typeof BecomingRoute
   '/crossroads': typeof CrossroadsRoute
+  '/emerging': typeof EmergingRoute
   '/homecoming': typeof HomecomingRoute
   '/origins': typeof OriginsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/becoming' | '/crossroads' | '/homecoming' | '/origins'
+  fullPaths:
+    | '/'
+    | '/becoming'
+    | '/crossroads'
+    | '/emerging'
+    | '/homecoming'
+    | '/origins'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/becoming' | '/crossroads' | '/homecoming' | '/origins'
+  to:
+    | '/'
+    | '/becoming'
+    | '/crossroads'
+    | '/emerging'
+    | '/homecoming'
+    | '/origins'
   id:
     | '__root__'
     | '/'
     | '/becoming'
     | '/crossroads'
+    | '/emerging'
     | '/homecoming'
     | '/origins'
   fileRoutesById: FileRoutesById
@@ -81,6 +103,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BecomingRoute: typeof BecomingRoute
   CrossroadsRoute: typeof CrossroadsRoute
+  EmergingRoute: typeof EmergingRoute
   HomecomingRoute: typeof HomecomingRoute
   OriginsRoute: typeof OriginsRoute
 }
@@ -99,6 +122,13 @@ declare module '@tanstack/react-router' {
       path: '/homecoming'
       fullPath: '/homecoming'
       preLoaderRoute: typeof HomecomingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/emerging': {
+      id: '/emerging'
+      path: '/emerging'
+      fullPath: '/emerging'
+      preLoaderRoute: typeof EmergingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/crossroads': {
@@ -129,6 +159,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BecomingRoute: BecomingRoute,
   CrossroadsRoute: CrossroadsRoute,
+  EmergingRoute: EmergingRoute,
   HomecomingRoute: HomecomingRoute,
   OriginsRoute: OriginsRoute,
 }
