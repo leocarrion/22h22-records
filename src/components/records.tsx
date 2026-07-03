@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { getReveal } from '~/data/reveals'
 
@@ -342,17 +343,23 @@ export function RevealModal({
   onClose: () => void
   themeColor?: string
 }) {
+  const [mediaIndex, setMediaIndex] = useState(0)
+
   if (!track || !track.id) return null
   const reveal = getReveal(track.id)
   if (!reveal) return null
 
-  const hasMessage = !!reveal.message
-  const hasMedia = reveal.media.length > 0
+  const media = reveal.media
+  const currentItem = media[mediaIndex] ?? null
+  const total = media.length
+
+  const prev = () => setMediaIndex((i) => Math.max(0, i - 1))
+  const next = () => setMediaIndex((i) => Math.min(total - 1, i + 1))
 
   return (
     <div className="fixed inset-0 z-[100] flex items-end">
       <div className="absolute inset-0 bg-black/70" onClick={onClose} />
-      <div className="relative z-10 w-full bg-[#141414] text-white max-h-[85vh] overflow-y-auto">
+      <div className="relative z-10 w-full bg-[#141414] text-white max-h-[90vh] overflow-y-auto">
         <div className="max-w-lg mx-auto px-6 pt-6 pb-12">
           <button
             onClick={onClose}
@@ -377,32 +384,83 @@ export function RevealModal({
             SÉLECTIONNÉ PAR
           </p>
           <p
-            className="text-[40px] font-bold text-white leading-tight"
+            className="text-[40px] font-bold text-white leading-tight mb-6"
             style={{ letterSpacing: '-0.03em', fontFamily: 'Inter, sans-serif' }}
           >
             {reveal.contributor}
           </p>
 
-          {hasMessage && (
-            <p className="mt-6 text-white/90 text-[16px] leading-relaxed italic">
-              "{reveal.message}"
-            </p>
+          {/* Media slider */}
+          {total > 0 && currentItem && (
+            <div className="mb-6">
+              <div className="relative bg-black rounded overflow-hidden">
+                {currentItem.type === 'image' ? (
+                  <img
+                    src={currentItem.src}
+                    alt={currentItem.caption ?? ''}
+                    className="w-full max-h-[60vw] object-cover"
+                  />
+                ) : (
+                  <video
+                    src={currentItem.src}
+                    controls
+                    playsInline
+                    className="w-full max-h-[60vw]"
+                  />
+                )}
+                {total > 1 && (
+                  <>
+                    <button
+                      onClick={prev}
+                      disabled={mediaIndex === 0}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-black/50 rounded-full disabled:opacity-20 hover:bg-black/80 transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-white text-[18px]">chevron_left</span>
+                    </button>
+                    <button
+                      onClick={next}
+                      disabled={mediaIndex === total - 1}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-black/50 rounded-full disabled:opacity-20 hover:bg-black/80 transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-white text-[18px]">chevron_right</span>
+                    </button>
+                  </>
+                )}
+              </div>
+
+              <div className="flex items-center justify-between mt-2 px-1">
+                {currentItem.caption ? (
+                  <p className="text-[12px] text-white/50 italic flex-1">{currentItem.caption}</p>
+                ) : (
+                  <span />
+                )}
+                {total > 1 && (
+                  <p className="text-[11px] font-bold tracking-wider text-white/30 shrink-0 ml-3">
+                    {mediaIndex + 1} / {total}
+                  </p>
+                )}
+              </div>
+
+              {/* Dot indicators */}
+              {total > 1 && (
+                <div className="flex justify-center gap-1.5 mt-3">
+                  {Array.from({ length: total }).map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setMediaIndex(i)}
+                      className={`w-1.5 h-1.5 rounded-full transition-colors ${i === mediaIndex ? 'bg-white' : 'bg-white/25'}`}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
           )}
 
-          {hasMedia && (
-            <div className="mt-6 flex flex-col gap-3">
-              {reveal.media.map((url, i) => (
-                <a
-                  key={i}
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[13px] font-medium underline text-white/70 hover:text-white transition-colors"
-                >
-                  Écouter / voir →
-                </a>
-              ))}
-            </div>
+          {/* Message */}
+          {reveal.message && (
+            <p className="text-white/85 text-[15px] leading-relaxed italic">
+              "{reveal.message}"
+            </p>
           )}
         </div>
       </div>
