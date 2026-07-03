@@ -195,8 +195,8 @@ function spotifySearchUrl(artist: string, title: string) {
   return `https://open.spotify.com/search/${encodeURIComponent(`${artist} ${title}`)}`
 }
 
-function appleMusicSearchUrl(artist: string, title: string) {
-  return `https://music.apple.com/search?term=${encodeURIComponent(`${artist} ${title}`)}`
+function youtubeSearchUrl(artist: string, title: string) {
+  return `https://www.youtube.com/results?search_query=${encodeURIComponent(`${artist} ${title}`)}`
 }
 
 function SpotifyIcon() {
@@ -207,10 +207,10 @@ function SpotifyIcon() {
   )
 }
 
-function AppleMusicIcon() {
+function YouTubeIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
-      <path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026C4.786.07 4.043.15 3.34.428 2.004.958 1.04 1.88.475 3.208c-.192.448-.292.925-.363 1.408-.056.392-.088.785-.1 1.18 0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424.05.815.154 1.624.497 2.373.65 1.42 1.738 2.353 3.234 2.802.42.127.856.187 1.293.228.555.053 1.11.06 1.667.06h11.03c.525 0 1.048-.034 1.57-.1.823-.106 1.597-.35 2.296-.81a5.046 5.046 0 001.88-2.207c.186-.42.293-.87.37-1.324.113-.675.138-1.358.137-2.04-.002-3.8 0-7.595-.003-11.393zm-6.423 3.99v5.712c0 .417-.058.827-.244 1.206-.29.59-.76.962-1.388 1.14-.35.1-.706.157-1.07.173-.95.045-1.773-.6-1.943-1.536a1.88 1.88 0 011.038-2.022c.323-.157.672-.216 1.018-.274.368-.062.737-.12 1.098-.212.282-.072.442-.274.46-.558.003-.04.004-.082.004-.122V7.797c0-.345-.192-.522-.53-.453l-5.005 1.07c-.285.06-.405.2-.405.495v7.17c0 .37-.02.74-.126 1.1-.285.99-1.03 1.542-2.066 1.58-.476.017-.942-.03-1.39-.2a1.878 1.878 0 01-1.24-1.797c.014-.97.64-1.69 1.58-1.894.386-.084.778-.14 1.167-.208.274-.047.554-.08.818-.165.314-.1.42-.274.42-.6V5.645c0-.327.17-.55.485-.62 1.063-.233 2.125-.463 3.19-.692l2.897-.625c.619-.133.928.134.932.764v4.622z"/>
+      <path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/>
     </svg>
   )
 }
@@ -271,16 +271,16 @@ export function TrackItem({
               </span>
             </a>
             <a
-              href={appleMusicSearchUrl(track.artist, track.title)}
+              href={youtubeSearchUrl(track.artist, track.title)}
               target="_blank"
               rel="noopener noreferrer"
-              title="Écouter sur Apple Music"
-              className="relative group text-[#FC3C44] opacity-70 hover:opacity-100 transition-all hover:scale-105"
+              title="Écouter sur YouTube"
+              className="relative group text-[#FF0000] opacity-70 hover:opacity-100 transition-all hover:scale-105"
               onClick={(e) => e.stopPropagation()}
             >
-              <AppleMusicIcon />
+              <YouTubeIcon />
               <span className="pointer-events-none absolute bottom-full right-0 mb-1 whitespace-nowrap rounded bg-ink-black px-2 py-0.5 text-[10px] font-bold tracking-wide text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                Écouter sur Apple Music
+                Écouter sur YouTube
               </span>
             </a>
           </div>

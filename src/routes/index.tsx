@@ -125,7 +125,7 @@ function CollectionPage() {
             className="text-[18px] leading-[28px] text-ink-black"
             style={{ letterSpacing: '-0.01em' }}
           >
-            Mon Picouze,
+            Cher Picouz,
           </p>
           <p
             className="text-[18px] leading-[28px] text-ink-black"
@@ -138,7 +138,7 @@ function CollectionPage() {
           </p>
           <p className="text-[14px] font-medium text-ink-black mt-1">
             Bon voyage.<br />
-            <span className="font-bold">— Julie</span>
+            <span className="font-bold">— Julie & Léo</span>
           </p>
         </section>
 
