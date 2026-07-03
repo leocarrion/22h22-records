@@ -4,7 +4,7 @@ import {
   RecordsHeader,
   RecordsBottomNav,
   TracklistSection,
-  TrackRevealOverlay,
+  RevealModal,
   type Track,
 } from '~/components/records'
 
@@ -15,21 +15,21 @@ export const Route = createFileRoute('/emerging')({
 
 const COLOR = '#7856AF'
 const COLOR_CLASS = 'text-emerging-purple'
-const FRONT_IMG = '/FRONT%20VINYLE%203.png'
+const FRONT_IMG = '/Front%20vinyles%20svg/3.svg'
 const MACARON_A = '/MACARON%20VINYLE%203%20FACE%20A.png'
 const MACARON_B = '/MACARON%20VINYLE%203%20FACE%20B.png'
 
 const sideA: Track[] = [
-  { num: '01', artist: 'Lorenzo', title: 'Nique la BAC', duration: '2:27' },
-  { num: '02', artist: 'Kid Cudi', title: "Day 'n' Nite", duration: '2:48' },
-  { num: '03', artist: 'Juicy J feat. Wiz Khalifa', title: "Stoner's Night 2", duration: '3:35' },
-  { num: '04', artist: 'Yeah Yeah Yeahs', title: 'Head Will Roll (A-Trak remix)', duration: '3:23' },
+  { id: 'emerging-a-1', num: '01', artist: 'Lorenzo', title: 'Nique la BAC', duration: '2:27' },
+  { id: 'emerging-a-2', num: '02', artist: 'Kid Cudi', title: "Day 'n' Nite", duration: '2:48' },
+  { id: 'emerging-a-3', num: '03', artist: 'Juicy J feat. Wiz Khalifa', title: "Stoner's Night 2", duration: '3:35' },
+  { id: 'emerging-a-4', num: '04', artist: 'Yeah Yeah Yeahs', title: 'Head Will Roll (A-Trak remix)', duration: '3:23' },
 ]
 
 const sideB: Track[] = [
-  { num: '01', artist: 'Mk Dub Revisited Edit', title: 'Push The Feeling On', duration: '4:03' },
-  { num: '02', artist: "ISHA & Limsa D'Aulnay", title: 'But en Or', duration: '2:37' },
-  { num: '03', artist: 'Kanye West, Pusha T', title: 'Runaway', duration: '7:00' },
+  { id: 'emerging-b-1', num: '01', artist: 'Mk Dub Revisited Edit', title: 'Push The Feeling On', duration: '4:03' },
+  { id: 'emerging-b-2', num: '02', artist: "ISHA & Limsa D'Aulnay", title: 'But en Or', duration: '2:37' },
+  { id: 'emerging-b-3', num: '03', artist: 'Kanye West, Pusha T', title: 'Runaway', duration: '7:00' },
 ]
 
 function EmergingPage() {
@@ -100,7 +100,7 @@ function EmergingPage() {
       </main>
 
       <RecordsBottomNav active="collection" />
-      <TrackRevealOverlay
+      <RevealModal
         track={selectedTrack}
         onClose={() => setSelectedTrack(null)}
         themeColor={COLOR}

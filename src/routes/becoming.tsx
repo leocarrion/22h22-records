@@ -4,7 +4,7 @@ import {
   RecordsHeader,
   RecordsBottomNav,
   TracklistSection,
-  TrackRevealOverlay,
+  RevealModal,
   type Track,
 } from '~/components/records'
 
@@ -15,20 +15,20 @@ export const Route = createFileRoute('/becoming')({
 
 const COLOR = '#1D4ED8'
 const COLOR_CLASS = 'text-becoming-blue'
-const FRONT_IMG = '/FRONT%20VINYLE%202.png'
+const FRONT_IMG = '/Front%20vinyles%20svg/2.svg'
 const MACARON_A = '/MACARON%20VINYLE%202%20FACE%20A.png'
 const MACARON_B = '/MACARON%20VINYLE%202%20FACE%20B.png'
 
 const sideA: Track[] = [
-  { num: '01', artist: 'Janelle Monáe', title: 'Tightrope', duration: '4:24' },
-  { num: '02', artist: 'Duck Sauce, A-Trak, Armand Van Helden', title: 'Big Bad Wolf', duration: '2:59' },
-  { num: '03', artist: 'UGK', title: 'One Day', duration: '4:47' },
+  { id: 'becoming-a-1', num: '01', artist: 'Janelle Monáe', title: 'Tightrope', duration: '4:24' },
+  { id: 'becoming-a-2', num: '02', artist: 'Duck Sauce, A-Trak, Armand Van Helden', title: 'Big Bad Wolf', duration: '2:59' },
+  { id: 'becoming-a-3', num: '03', artist: 'UGK', title: 'One Day', duration: '4:47' },
 ]
 
 const sideB: Track[] = [
-  { num: '01', artist: 'Vybz Kartel', title: 'Summer Time', duration: '4:10' },
-  { num: '02', artist: 'Ghali', title: '22:22', duration: '3:00' },
-  { num: '03', artist: 'Franko', title: 'Coller la petite', duration: '3:52' },
+  { id: 'becoming-b-1', num: '01', artist: 'Vybz Kartel', title: 'Summer Time', duration: '4:10' },
+  { id: 'becoming-b-2', num: '02', artist: 'Ghali', title: '22:22', duration: '3:00' },
+  { id: 'becoming-b-3', num: '03', artist: 'Franko', title: 'Coller la petite', duration: '3:52' },
 ]
 
 function BecomingPage() {
@@ -99,7 +99,7 @@ function BecomingPage() {
       </main>
 
       <RecordsBottomNav active="collection" />
-      <TrackRevealOverlay
+      <RevealModal
         track={selectedTrack}
         onClose={() => setSelectedTrack(null)}
         themeColor={COLOR}

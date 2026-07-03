@@ -4,7 +4,7 @@ import {
   RecordsHeader,
   RecordsBottomNav,
   TracklistSection,
-  TrackRevealOverlay,
+  RevealModal,
   type Track,
 } from '~/components/records'
 
@@ -15,21 +15,21 @@ export const Route = createFileRoute('/homecoming')({
 
 const COLOR = '#7A1F1F'
 const COLOR_CLASS = 'text-homecoming-red'
-const FRONT_IMG = '/FRONT%20VINYLE%205.png'
+const FRONT_IMG = '/Front%20vinyles%20svg/5.svg'
 const MACARON_A = '/MACARON%20VINYLE%205%20FACE%20A.png'
 // Side J uses the FACE B file (confirmed)
 const MACARON_J = '/MACARON%20VINYLE%205%20FACE%20B.png'
 
 const sideA: Track[] = [
-  { num: '01', artist: 'Roy Davis Jr. & Peven Everett', title: 'Gabrielle (Words To Give By Mix)', duration: '7:22' },
-  { num: '02', artist: 'Chase & Status, Clementine Douglas', title: 'Say The Word', duration: '3:57' },
+  { id: 'homecoming-a-1', num: '01', artist: 'Roy Davis Jr. & Peven Everett', title: 'Gabrielle (Words To Give By Mix)', duration: '7:22' },
+  { id: 'homecoming-a-2', num: '02', artist: 'Chase & Status, Clementine Douglas', title: 'Say The Word', duration: '3:57' },
 ]
 
 const sideJ: Track[] = [
-  { num: '01', artist: 'Jorja Smith', title: 'The Way I Love You', duration: '3:22' },
-  { num: '02', artist: 'Jim Legxacy', title: 'sos', duration: '2:15' },
-  { num: '03', artist: 'Mansur Brown', title: 'Love is Mine', duration: '3:26' },
-  { num: '04', artist: 'Alicia Keys', title: 'Un-thinkable', duration: '4:09' },
+  { id: 'homecoming-j-1', num: '01', artist: 'Jorja Smith', title: 'The Way I Love You', duration: '3:22' },
+  { id: 'homecoming-j-2', num: '02', artist: 'Jim Legxacy', title: 'sos', duration: '2:15' },
+  { id: 'homecoming-j-3', num: '03', artist: 'Mansur Brown', title: 'Love is Mine', duration: '3:26' },
+  { id: 'homecoming-j-4', num: '04', artist: 'Alicia Keys', title: 'Un-thinkable', duration: '4:09' },
 ]
 
 function HomecomingPage() {
@@ -97,7 +97,7 @@ function HomecomingPage() {
       </main>
 
       <RecordsBottomNav active="collection" />
-      <TrackRevealOverlay
+      <RevealModal
         track={selectedTrack}
         onClose={() => setSelectedTrack(null)}
         themeColor={COLOR}

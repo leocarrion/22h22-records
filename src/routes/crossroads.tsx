@@ -4,7 +4,7 @@ import {
   RecordsHeader,
   RecordsBottomNav,
   TracklistSection,
-  TrackRevealOverlay,
+  RevealModal,
   type Track,
 } from '~/components/records'
 
@@ -15,20 +15,20 @@ export const Route = createFileRoute('/crossroads')({
 
 const COLOR = '#68703E'
 const COLOR_CLASS = 'text-crossroads-olive'
-const FRONT_IMG = '/FRONT%20VINYLE%204.png'
+const FRONT_IMG = '/Front%20vinyles%20svg/4.svg'
 const MACARON_A = '/MACARON%20VINYLE%204%20FACE%20A.png'
 const MACARON_B = '/MACARON%20VINYLE%204%20FACE%20B.png'
 
 const sideA: Track[] = [
-  { num: '01', artist: 'Mike Jones feat. Slim Thug and Paul Wall', title: "Still Tippin'", duration: '4:31' },
-  { num: '02', artist: 'Booba x Francky Vincent Mashup', title: 'Validée de la Passion', duration: '4:48' },
-  { num: '03', artist: 'Roy Ayers Ubiquity', title: 'Everybody Loves The Sunshine', duration: '4:00' },
+  { id: 'crossroads-a-1', num: '01', artist: 'Mike Jones feat. Slim Thug and Paul Wall', title: "Still Tippin'", duration: '4:31' },
+  { id: 'crossroads-a-2', num: '02', artist: 'Booba x Francky Vincent Mashup', title: 'Validée de la Passion', duration: '4:48' },
+  { id: 'crossroads-a-3', num: '03', artist: 'Roy Ayers Ubiquity', title: 'Everybody Loves The Sunshine', duration: '4:00' },
 ]
 
 const sideB: Track[] = [
-  { num: '01', artist: 'Myd', title: 'Born a Loser', duration: '3:43' },
-  { num: '02', artist: 'Fred again.., Lil Yachty, Overmono', title: 'stayinit', duration: '4:34' },
-  { num: '03', artist: 'Kwengface, Joy Orbison, Overmono', title: 'Freedom 2', duration: '3:26' },
+  { id: 'crossroads-b-1', num: '01', artist: 'Myd', title: 'Born a Loser', duration: '3:43' },
+  { id: 'crossroads-b-2', num: '02', artist: 'Fred again.., Lil Yachty, Overmono', title: 'stayinit', duration: '4:34' },
+  { id: 'crossroads-b-3', num: '03', artist: 'Kwengface, Joy Orbison, Overmono', title: 'Freedom 2', duration: '3:26' },
 ]
 
 function CrossroadsPage() {
@@ -99,7 +99,7 @@ function CrossroadsPage() {
       </main>
 
       <RecordsBottomNav active="collection" />
-      <TrackRevealOverlay
+      <RevealModal
         track={selectedTrack}
         onClose={() => setSelectedTrack(null)}
         themeColor={COLOR}

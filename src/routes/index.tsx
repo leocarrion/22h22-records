@@ -12,7 +12,7 @@ const vinyls = [
     color: '#C65D3B',
     number: '01 / 05',
     href: '/origins' as const,
-    frontImg: '/FRONT%20VINYLE%201.png',
+    frontImg: '/Front%20vinyles%20svg/1.svg',
     macaronA: '/MACARON%20VINYLE%201%20FACE%20A.png',
   },
   {
@@ -21,7 +21,7 @@ const vinyls = [
     color: '#1D4ED8',
     number: '02 / 05',
     href: '/becoming' as const,
-    frontImg: '/FRONT%20VINYLE%202.png',
+    frontImg: '/Front%20vinyles%20svg/2.svg',
     macaronA: '/MACARON%20VINYLE%202%20FACE%20A.png',
   },
   {
@@ -30,7 +30,7 @@ const vinyls = [
     color: '#7856AF',
     number: '03 / 05',
     href: '/emerging' as const,
-    frontImg: '/FRONT%20VINYLE%203.png',
+    frontImg: '/Front%20vinyles%20svg/3.svg',
     macaronA: '/MACARON%20VINYLE%203%20FACE%20A.png',
   },
   {
@@ -39,7 +39,7 @@ const vinyls = [
     color: '#68703E',
     number: '04 / 05',
     href: '/crossroads' as const,
-    frontImg: '/FRONT%20VINYLE%204.png',
+    frontImg: '/Front%20vinyles%20svg/4.svg',
     macaronA: '/MACARON%20VINYLE%204%20FACE%20A.png',
   },
   {
@@ -48,7 +48,7 @@ const vinyls = [
     color: '#7A1F1F',
     number: '05 / 05',
     href: '/homecoming' as const,
-    frontImg: '/FRONT%20VINYLE%205.png',
+    frontImg: '/Front%20vinyles%20svg/5.svg',
     macaronA: '/MACARON%20VINYLE%205%20FACE%20A.png',
   },
 ]

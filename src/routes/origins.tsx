@@ -4,7 +4,7 @@ import {
   RecordsHeader,
   RecordsBottomNav,
   TracklistSection,
-  TrackRevealOverlay,
+  RevealModal,
   type Track,
 } from '~/components/records'
 
@@ -15,21 +15,21 @@ export const Route = createFileRoute('/origins')({
 
 const COLOR = '#C65D3B'
 const COLOR_CLASS = 'text-origins-orange'
-const FRONT_IMG = '/FRONT%20VINYLE%201.png'
+const FRONT_IMG = '/Front%20vinyles%20svg/1.svg'
 const MACARON_A = '/MACARON%20VINYLE%201%20FACE%20A.png'
 const MACARON_B = '/MACARON%20VINYLE%201%20FACE%20B.png'
 
 const sideA: Track[] = [
-  { num: '01', artist: 'Léopold Nord & Vous', title: "C'est l'amour (1988)", duration: '3:15' },
-  { num: '02', artist: 'Pow Wow', title: 'Le Lion est mort ce soir', duration: '2:59' },
-  { num: '03', artist: 'Chabat, Lauby, Darmon, Farrugia', title: 'La Carioca', duration: '2:25' },
-  { num: '04', artist: 'Jungle', title: 'Back on 74', duration: '3:29' },
+  { id: 'origins-a-1', num: '01', artist: 'Léopold Nord & Vous', title: "C'est l'amour (1988)", duration: '3:15' },
+  { id: 'origins-a-2', num: '02', artist: 'Pow Wow', title: 'Le Lion est mort ce soir', duration: '2:59' },
+  { id: 'origins-a-3', num: '03', artist: 'Chabat, Lauby, Darmon, Farrugia', title: 'La Carioca', duration: '2:25' },
+  { id: 'origins-a-4', num: '04', artist: 'Jungle', title: 'Back on 74', duration: '3:29' },
 ]
 
 const sideB: Track[] = [
-  { num: '01', artist: '2 Unlimited', title: 'Get Ready', duration: '3:42' },
-  { num: '02', artist: '113 feat. Doudou Masta', title: 'Truc de fou', duration: '4:16' },
-  { num: '03', artist: 'Lazee', title: "I'm Not Pop", duration: '3:43' },
+  { id: 'origins-b-1', num: '01', artist: '2 Unlimited', title: 'Get Ready', duration: '3:42' },
+  { id: 'origins-b-2', num: '02', artist: '113 feat. Doudou Masta', title: 'Truc de fou', duration: '4:16' },
+  { id: 'origins-b-3', num: '03', artist: 'Lazee', title: "I'm Not Pop", duration: '3:43' },
 ]
 
 function OriginsPage() {
@@ -100,7 +100,7 @@ function OriginsPage() {
       </main>
 
       <RecordsBottomNav active="collection" />
-      <TrackRevealOverlay
+      <RevealModal
         track={selectedTrack}
         onClose={() => setSelectedTrack(null)}
         themeColor={COLOR}

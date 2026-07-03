@@ -1,4 +1,5 @@
 import { useNavigate } from '@tanstack/react-router'
+import { getReveal } from '~/data/reveals'
 
 export type Selector = {
   name: string
@@ -8,6 +9,7 @@ export type Selector = {
 }
 
 export type Track = {
+  id?: string
   num: string
   title: string
   artist: string
@@ -283,7 +285,7 @@ export function TrackItem({
           </div>
         </div>
       </div>
-      {track.selector && (
+      {track.id && getReveal(track.id) && (
         <button
           onClick={() => onReveal(track)}
           className={`ml-8 text-[10px] font-bold tracking-[0.13em] uppercase text-left hover:underline ${colorClass}`}
@@ -328,5 +330,82 @@ export function TracklistSection({
         ))}
       </div>
     </section>
+  )
+}
+
+export function RevealModal({
+  track,
+  onClose,
+  themeColor = '#8B2A2A',
+}: {
+  track: Track | null
+  onClose: () => void
+  themeColor?: string
+}) {
+  if (!track || !track.id) return null
+  const reveal = getReveal(track.id)
+  if (!reveal) return null
+
+  const hasMessage = !!reveal.message
+  const hasMedia = reveal.media.length > 0
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-end">
+      <div className="absolute inset-0 bg-black/70" onClick={onClose} />
+      <div className="relative z-10 w-full bg-[#141414] text-white max-h-[85vh] overflow-y-auto">
+        <div className="max-w-lg mx-auto px-6 pt-6 pb-12">
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 opacity-50 hover:opacity-100 transition-opacity"
+          >
+            <span className="material-symbols-outlined text-white">close</span>
+          </button>
+
+          <p
+            className="text-[11px] font-bold tracking-[0.15em] text-white/40 mb-1"
+            style={{ fontFamily: 'Inter, sans-serif' }}
+          >
+            {track.num}. {track.title.toUpperCase()}
+          </p>
+          <p className="text-[13px] font-medium mb-6" style={{ color: themeColor }}>
+            {track.artist}
+          </p>
+
+          <div className="h-px bg-white/10 mb-6" />
+
+          <p className="text-[11px] font-bold tracking-[0.15em] text-white/40 mb-4">
+            SÉLECTIONNÉ PAR
+          </p>
+          <p
+            className="text-[40px] font-bold text-white leading-tight"
+            style={{ letterSpacing: '-0.03em', fontFamily: 'Inter, sans-serif' }}
+          >
+            {reveal.contributor}
+          </p>
+
+          {hasMessage && (
+            <p className="mt-6 text-white/90 text-[16px] leading-relaxed italic">
+              "{reveal.message}"
+            </p>
+          )}
+
+          {hasMedia && (
+            <div className="mt-6 flex flex-col gap-3">
+              {reveal.media.map((url, i) => (
+                <a
+                  key={i}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[13px] font-medium underline text-white/70 hover:text-white transition-colors"
+                >
+                  Écouter / voir →
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   )
 }
